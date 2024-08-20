@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vitalmente - Cuestionario de Personalidad</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/fevicon.png" type="image/gif">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #81c784; /* Verde claro */
+            padding: 10px;
+            text-align: center;
+        }
+        .header .logo img {
+            width: 150px;
+            cursor: pointer;
+        }
+        .quiz-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .quiz-container h1 {
+            font-size: 24px;
+            text-align: center;
+            color: #388e3c; /* Verde oscuro */
+            margin-bottom: 20px;
+        }
+        .personal-info, .questions, #results, #follow-up {
+            margin-bottom: 20px;
+        }
+        .personal-info label, .question p {
+            font-size: 16px;
+            margin: 10px 0;
+            color: #388e3c;
+        }
+        .personal-info input, .questions input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .questions .question {
+            margin-bottom: 15px;
+        }
+        .questions .question div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .questions input[type="radio"] {
+            margin: 0 5px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .button-container button {
+            flex: 1;
+            margin: 0 5px; /* Espacio entre botones */
+        }
+        button[type="submit"], #contact-button, .nav-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #388e3c; /* Verde oscuro */
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        button[type="submit"]:hover, #contact-button:hover, .nav-button:hover {
+            background-color: #2e7d32; /* Verde más oscuro */
+        }
+        #results, #follow-up {
+            text-align: center;
+            display: none; /* Inicialmente oculto */
+        }
+        #results p, #follow-up p {
+            font-size: 18px;
+            margin: 15px 0;
+        }
+        footer {
+            background-color: #388e3c; /* Verde oscuro */
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        footer p {
+            margin: 0;
+        }
+        .return-home {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        @media (max-width: 600px) {
+            .quiz-container {
+                padding: 10px;
+            }
+            .quiz-container h1 {
+                font-size: 20px;
+            }
+            .personal-info label, .question p {
+                font-size: 14px;
+            }
+            button[type="submit"], #contact-button, .nav-button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header con logo -->
+    <div class="header">
+        <a href="index.html" class="logo" aria-label="Volver a la página principal"><img src="images/logo.png" alt="Logo de Vitalmente"></a>
+    </div>
+    <div class="quiz-container">
+        <h1>Cuestionario de Personalidad</h1>
+        <form id="personality-quiz" aria-labelledby="quiz-title">
+            <div id="personal-info">
+                <h2 id="quiz-title">Información Personal</h2>
+                <div class="personal-info">
+                    <label for="full-name">Nombre Completo:</label>
+                    <input type="text" id="full-name" name="full-name" required aria-required="true">
+                    <label for="age">Edad:</label>
+                    <input type="number" id="age" name="age" required aria-required="true">
+                    <label for="city">Ciudad:</label>
+                    <input type="text" id="city" name="city" required aria-required="true">
+                    <label for="phone">Número de Teléfono:</label>
+                    <input type="text" id="phone" name="phone" required aria-required="true">
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" id="email" name="email" required aria-required="true">
+                </div>
+                <button type="button" id="start-quiz" aria-label="Comenzar cuestionario">Comenzar Cuestionario</button>
+            </div>
+            <div id="quiz-questions" style="display: none;">
+                <div class="question">
+                    <p id="question-text"></p>
+                    <div id="options-container"></div>
+                    <div class="button-container">
+                        <button type="button" id="prev-question" class="nav-button" style="display: none;">Anterior</button>
+                        <button type="button" id="next-question" class="nav-button">Siguiente</button>
+                        <button type="submit" id="submit-button" class="nav-button" style="display: none;">Enviar</button>
+                    </div>
+                </div>
+            </div>
+            <div id="results" aria-live="polite">
+                <h2>Resultados</h2>
+                <p id="result-text"></p>
+            </div>
+            <div id="follow-up">
+                <p>¿Desea que un profesional lo contacte? Es completamente gratuito.</p>
+                <button id="contact-button" aria-label="Solicitar contacto de un profesional">Sí, quiero ser contactado</button>
+            </div>
+        </form>
+    </div>
+    <footer>
+        <p>&copy; 2023 Vitalmente. Todos los derechos reservados.</p>
+        <p class="return-home">Haga clic en el logo para volver a la página inicial.</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script>
+        // Actualizamos las preguntas para incluir las nuevas preguntas
+        const questions = [
+            { text: "1. Me preocupo por todo.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "2. Hago amigos con facilidad.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "3. Tengo mucha imaginación.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "4. Confío en los demás.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "5. Completo las tareas con éxito.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "6. Me enfado con facilidad.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "7. Disfruto mucho en las grandes fiestas y reuniones.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "8. Creo que el arte es importante.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "9. A veces engaño a los demás para salirme con la mía.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "10. No me gusta que las cosas estén desordenadas, me gusta ordenar.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "11. A menudo me siento triste.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "12. Me gusta hacerme cargo de la situación.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "13. Experimento emociones profundas y variadas.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "14. Me encanta ayudar a los demás.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "15. Siempre cumplo mis promesas.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "16. Me resulta difícil acercarme a los demás.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "17. Siempre estoy ocupado, de aquí para allá.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "18. Prefiero la variedad a la rutina.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "19. Me encanta discutir o pelear.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "20. Trabajo muy duro.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "21. Hago excesos algunas veces.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "22. Me encantan las sensaciones fuertes.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "23. Disfruto leyendo libros y artículos interesantes.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "24. Creo que soy mejor que los demás.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] },
+            { text: "25. Siempre estoy preparado para lo que sea.", options: ["Muy Poco", "Poco", "Más o Menos", "Sí", "Mucho"] }
+        ];
+    
+        let currentQuestionIndex = 0;
+        let score = 0;
+    
+        function renderQuestion() {
+            const question = questions[currentQuestionIndex];
+            document.getElementById('question-text').innerText = question.text;
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            question.options.forEach((option, index) => {
+                optionsContainer.innerHTML += `<label><input type="radio" name="question${currentQuestionIndex}" value="${index + 1}"> ${option}</label><br>`;
+            });
+    
+            document.getElementById('prev-question').style.display = currentQuestionIndex === 0 ? 'none' : 'block';
+            document.getElementById('next-question').style.display = currentQuestionIndex === questions.length - 1 ? 'none' : 'block';
+            document.getElementById('submit-button').style.display = currentQuestionIndex === questions.length - 1 ? 'block' : 'none';
+        }
+    
+        document.getElementById('start-quiz').addEventListener('click', function() {
+            document.getElementById('personal-info').style.display = 'none';
+            document.getElementById('quiz-questions').style.display = 'block';
+            renderQuestion();
+        });
+    
+        document.getElementById('next-question').addEventListener('click', function() {
+            const selectedValue = $('input[name="question' + currentQuestionIndex + '"]:checked').val();
+            if (selectedValue) {
+                score += parseInt(selectedValue);
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    renderQuestion();
+                }
+            } else {
+                alert('Por favor, seleccione una opción.');
+            }
+        });
+    
+        document.getElementById('prev-question').addEventListener('click', function() {
+            currentQuestionIndex--;
+            renderQuestion();
+        });
+    
+        document.getElementById('personality-quiz').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let resultText = '';
+            if (score <= 25) {
+                resultText = 'Bajo en algún trastorno.';
+            } else if (score <= 50) {
+                resultText = 'Medio en algún trastorno.';
+            } else {
+                resultText = 'Alto en algún trastorno.';
+            }
+    
+            document.getElementById('quiz-questions').style.display = 'none';
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('follow-up').style.display = 'block';
+            document.getElementById('result-text').innerText = `Su puntuación es ${resultText}`;
+        });
+    
+        document.getElementById('contact-button').addEventListener('click', function() {
+            alert('Un profesional se pondrá en contacto con usted pronto.');
+            window.location.href = 'gallery.html'; // Redirige a la página de servicio
+        });
+    </script>
+</body>
+</html>

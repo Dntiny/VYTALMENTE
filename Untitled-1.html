@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nav Bar Estilo Psycos</title>
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0; /* Color de fondo del body */
+            display: flex;
+            justify-content: center; /* Centrar la barra de navegación horizontalmente */
+            align-items: center; /* Centrar la barra de navegación verticalmente */
+            height: 100vh; /* Ocupar toda la altura de la ventana */
+        }
+
+        /* Estilos para el contenedor principal de la barra de navegación */
+        .navbar {
+            background-color: white;
+            padding: 20px 40px; /* Ajusta el padding según sea necesario */
+            border-radius: 20px; /* Esquinas redondeadas */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave para dar un efecto flotante */
+            max-width: 800px; /* Ancho máximo */
+        }
+
+        /* Contenedor interno que agrupa los enlaces */
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Estilo para la lista de enlaces */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px; /* Espacio entre los enlaces */
+        }
+
+        /* Estilo para los enlaces */
+        .nav-links a {
+            text-decoration: none;
+            color: #333; /* Color del texto */
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 10px; /* Bordes redondeados para los enlaces */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Efecto hover para los enlaces */
+        .nav-links a:hover {
+            background-color: #f7f7f7; /* Fondo al hacer hover */
+            color: #007bff; /* Color del texto al hacer hover */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <ul class="nav-links">
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Sobre Nosotros</a></li>
+                    <li><a href="#">Ayudar A Alguien</a></li>
+                    <li><a href="#">Noticias</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+</body>
+</html>

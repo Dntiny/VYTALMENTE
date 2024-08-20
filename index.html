@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>Vytalmente</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <!-- style css -->
+      <link rel="stylesheet" href="css/style.css">
+      <!-- Responsive-->
+      <link rel="stylesheet" href="css/responsive.css">
+      <!-- fevicon -->
+      <link rel="icon" href="images/fevicon.png" type="image/gif" />
+      <!-- Scrollbar Custom CSS -->
+      <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+      <!-- Tweaks for older IEs-->
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+   </head>
+   <!-- body -->
+   <body class="main-layout">
+      <div class="cookie-alert">
+
+         Utilizamos cookies para mejorar tu experiencia. Al continuar, aceptas el uso de cookies. <a href="#" class="cookie-accept">Aceptar</a>
+     </div>
+     <style>
+      .cookie-alert {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          background-color: #f5f5f5;
+          color: #333;
+          padding: 15px;
+          box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
+          z-index: 9999;
+          font-family: 'Roboto', sans-serif;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+      }
+
+      .cookie-alert p {
+          margin: 0;
+          padding-right: 10px;
+      }
+
+      .cookie-accept {
+          background-color: #4CAF50;
+          color: white;
+          padding: 10px 20px;
+          text-decoration: none;
+          border-radius: 4px;
+          font-weight: bold;
+      }
+
+      .cookie-accept:hover {
+          background-color: #45a049;
+      }
+
+      .overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          z-index: 9998;
+          display: none;
+      }
+  </style>
+  <script>
+      const cookieAlert = document.querySelector('.cookie-alert');
+      const cookieAccept = document.querySelector('.cookie-accept');
+      const overlay = document.querySelector('.overlay');
+
+      cookieAccept.addEventListener('click', () => {
+          cookieAlert.style.display = 'none';
+          overlay.style.display = 'none';
+          document.cookie = "cookiesAccepted=true; expires=365d; path=/";
+      });
+
+      if (document.cookie.indexOf("cookiesAccepted=") === -1) {
+          cookieAlert.style.display = 'block';
+          overlay.style.display = 'block';
+      } else {
+          cookieAlert.style.display = 'none';
+          overlay.style.display = 'none';
+      }
+  </script>
+      <!-- loader  -->
+      <div class="loader_bg">
+         <div class="loader"><img src="images/loading.gif" alt="#"/></div>
+      </div>
+      <!-- end loader -->
+       
+      <!-- header -->
+               
+      <header>
+         <!-- header inner -->
+         <div class="header">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-12 col-sm-3 col logo_section">
+                     <div class="full">
+                        <div class="center-desk">
+                           <div class="logo">
+                              <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-10 offset-md-1">
+                     <nav class="navigation navbar navbar-expand-md navbar-dark ">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarsExample04">
+                           <ul class="navbar-nav mr-auto">
+                              <li class="nav-item active">
+                                 <a class="nav-link" href="index.html">Inicio</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="about.html">Nosotros</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="service.html">Apoyo</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="contact.html"><span class="red">URGENCIA</span></a>
+                              </li>
+                           </ul>
+                        </div>
+                        
+                     </nav>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </header>
+      <!-- end header inner -->
+      <!-- end header -->
+      <!--  service -->
+      <div id="service" class="service">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="titlepage">
+                     <h2>¿Te gustaría <span class="green">hablar con alguien?</span></h2>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-10 offset-md-1">
+                  <div class="row">
+                     <div class="col-md-5">
+                        <div class="service_box">
+                           <h3>¡Hola! Estamos aquí para ti.</h3>
+                           <p>
+                              Nos importa tu bienestar y el de tus seres queridos. ¡No estás solo/a en esto, cuenta con nosotros para darte el apoyo que necesitas!
+                           </p>
+                           <div class="button-container">
+                              <a class="btn-custom" href="service.html">TESTEATE</a>
+                              <a class="btn-custom" href="contact.html">URGENCIA</a>
+                          </div>
+                        </div>
+                     </div>
+                     <div class="col-md-7">
+                        <div class="about_img">
+                           <figure><img src="images/ayuda.png" alt="#"/></figure>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end service -->
+
+      <!-- about -->
+      <div id="about" class="about">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-5">
+                  <div class="titlepage">
+                     <h2>Sobre <span class="green">Nosotros</span></h2>
+                     <p>Vytalmente es un espacio donde la salud y el bienestar se encuentran. Somos un equipo de expertos en nutrición y psicología que buscamos transformar vidas a través de soluciones innovadoras y personalizadas. Nos apasiona combinar los últimos avances científicos con un enfoque humano para diseñar planes de tratamiento que se adapten a tu estilo de vida y tus objetivos. En Vitalmente, creemos que cada persona es única y merece un cuidado especial.</p>
+                     <a class="read_more" href="about.html"> Saber más</a>
+                  </div>
+               </div>
+               <div class="col-md-7">
+                  <div class="about_gif">
+                     <figure><img src="images/vi3.gif" alt="#"/></figure>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end about -->
+
+      <!-- banner -->
+      <section class="banner_main">
+         <div id="myCarousel" class="carousel slide banner" data-ride="carousel">
+            <ol class="carousel-indicators">
+               <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+               <li data-target="#myCarousel" data-slide-to="1"></li>
+               <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <div class="container">
+                     <div class="carousel-caption relative">
+                        <div class="row">
+                           <div class="col-md-7 offset-md-5">
+                              <div class="text-bg">
+                                 <h1> Vytalmente </h1>
+                                 <span class="black">Tu viaje hacia el bienestar integral, paso a paso.</span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="carousel-item">
+                  <div class="container">
+                     <div class="carousel-caption relative">
+                        <div class="row">
+                           <div class="col-md-7 offset-md-5">
+                              <div class="text-bg">
+                                 <h1> Vive <br> Plenamente</h1>
+                                 <span class="black">Nutriendo cuerpo y alma.</span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="carousel-item">
+                  <div class="container">
+                     <div class="carousel-caption relative">
+                        <div class="row">
+                           <div class="col-md-7 offset-md-5">
+                              <div class="text-bg">
+                                 <h1> Tu bienestar,<br>nuestro compromiso</h1>
+                                 <span class="black">Encuentra tu equilibrio vital.</span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
+            <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            <span class="sr-only">Next</span>
+            </a>
+         </div>
+      </section>
+      <!-- end banner -->
+
+      <!--  footer -->
+      <footer>
+         <div class="footer">
+            <div class="container">
+               <div class="row">
+                  <div class=" col-md-3 col-sm-6">
+                     <ul class="social_icon">
+                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                     </ul>
+                     <p class="variat pad_roght2">Nos encantaría mantenernos en contacto contigo. 
+                        Síguenos en nuestras redes sociales para recibir más información útil sobre nutrición, salud y bienestar. 
+                     </p>
+                  </div>
+                  <div class=" col-md-3 col-sm-6">
+                     <h3>¡Vamos a hacerlo juntos! </h3>
+                     <p  class="variat pad_roght2">
+                        La clave está en nutrir tu cuerpo y tu mente con hábitos saludables y positivos. ¡Hoy es el mejor día para empezar a sentirte increíble!🥗💪
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                     <h3>INFORMATION</h3>
+                     <ul class="link_menu">
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="about.html"> Nosotros</a></li>
+                        <li><a href="service.html">Apoyo</a></li>
+                        <li><a href="gallery.html">Ayuda</a></li>
+                        <li><a href="testimonial.html">Testimonos</a></li>
+                        <li><a href="contact.html">URGENCIA</a></li>
+                     </ul>
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                     <h3>Encuentra consejos, recetas, y mucho más. </h3>
+                     <p  class="variat">
+                        ¡Únete a nuestra comunidad y comparte tus experiencias! 
+                     </p>
+                  </div>
+                  <div class="col-md-6 offset-md-6">
+                     <form id="hkh" class="bottom_form">
+                        <input class="enter" placeholder="Enter your email" type="text" name="Enter your email">
+                        <button class="sub_btn">subscribe</button>
+                     </form>
+                  </div>
+               </div>
+            </div>
+            <div class="copyright">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-md-10 offset-md-1">
+                        <p>&copy; 2023 Vitalmente. Todos los derechos reservados.</p>
+                        <p class="return-home">Haga clic en el logo para volver a la página inicial.</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </footer>
+      <!-- end footer -->
+      <!-- Javascript files-->
+      <script src="js/jquery.min.js"></script>
+      <script src="js/bootstrap.bundle.min.js"></script>
+      <script src="js/jquery-3.0.0.min.js"></script>
+      <!-- sidebar -->
+      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="js/custom.js"></script>
+   </body>
+</html>
