@@ -9,16 +9,20 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="images/fevicon.png" type="image/gif">
     <link rel="stylesheet" href="css/responsive.css">
+    <div class="cookie-alert">  
+
+        Antes de continuar te invito a que aceptas los terminos y condciones para ponernos en contacto contigo y hacer siguimiento a tu solicitud. <a  class="cookie-accept">Aceptar</a>
+    </div>
     <style>
-        body {
+         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f4f8;
+            background-color: #f4f4f4;
             color: #333;
             margin: 0;
             padding: 0;
         }
         .header {
-            background-color: #81c784; /* Verde claro */
+            background-color: #f4f4f4;
             padding: 10px;
             text-align: center;
         }
@@ -37,7 +41,7 @@
         .quiz-container h1 {
             font-size: 24px;
             text-align: center;
-            color: #388e3c; /* Verde oscuro */
+            color: #000000;
             margin-bottom: 20px;
         }
         .personal-info, .questions, #results, #follow-up {
@@ -73,13 +77,13 @@
         }
         .button-container button {
             flex: 1;
-            margin: 0 5px; /* Espacio entre botones */
+            margin: 0 5px;
         }
         button[type="submit"], #contact-button, .nav-button {
             display: block;
             width: 100%;
             padding: 10px;
-            background-color: #388e3c; /* Verde oscuro */
+            background-color: #388e3c;
             color: #fff;
             border: none;
             border-radius: 4px;
@@ -89,18 +93,18 @@
             transition: background-color 0.3s;
         }
         button[type="submit"]:hover, #contact-button:hover, .nav-button:hover {
-            background-color: #2e7d32; /* Verde más oscuro */
+            background-color: #2e7d32;
         }
         #results, #follow-up {
             text-align: center;
-            display: none; /* Inicialmente oculto */
+            display: none;
         }
         #results p, #follow-up p {
             font-size: 18px;
             margin: 15px 0;
         }
         footer {
-            background-color: #388e3c; /* Verde oscuro */
+            background-color: #388e3c;
             color: #fff;
             text-align: center;
             padding: 20px 0;
@@ -125,6 +129,59 @@
             button[type="submit"], #contact-button, .nav-button {
                 font-size: 14px;
             }
+        }
+
+        .cookie-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 500px;
+            background-color: #f5f5f5;
+            color: #333;
+            padding: 20px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cookie-alert p {
+            margin-bottom: 20px;
+        }
+
+        .cookie-accept {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .cookie-accept:hover {
+            background-color: #45a049;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+        }
+
+        body.cookie-disabled *:not(.cookie-alert, .cookie-alert *, .overlay) {
+            pointer-events: none;
+            opacity: 0.5;
         }
     </style>
 </head>
