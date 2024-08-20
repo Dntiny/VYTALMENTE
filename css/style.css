@@ -168,7 +168,7 @@ img {
 }
 
 .btn-custom {
-     background-color: #16d316; /* Color de fondo del botón */
+     background-color: #ffffff; /* Color de fondo del botón */
      border: none;
      padding: 12px 40px;
      font-size: 16px;
@@ -181,7 +181,7 @@ img {
 }
 
 button:hover, .btn:hover {
-     background-color: #388E3C;
+     background-color: #33cf3b;
      transform: scale(1.05);
   }
 /* Contenedor para los botones */
@@ -195,7 +195,7 @@ button:hover, .btn:hover {
 .lead {
      font-size: 18px;
      line-height: 30px;
-     color: #767676;
+     color: #000000;
      margin: 0;
      padding: 0;
 }
@@ -305,7 +305,7 @@ button {
  .navigation.navbar-dark .navbar-nav .nav-link:focus,
  .navigation.navbar-dark .navbar-nav .nav-link:hover {
      color: #ffffff;     
-     background-color: #503737;
+     background-color: #887272;
  }
  
  /* Estilos para los enlaces activos */
@@ -313,8 +313,8 @@ button {
  .navigation.navbar-dark .navbar-nav .nav-link.active,
  .navigation.navbar-dark .navbar-nav .nav-link.show,
  .navigation.navbar-dark .navbar-nav .show>.nav-link {
-     color: #ffffff;
-     background-color: #967171;
+     color: #49d625;
+     background-color: #ffffff;
  }
  
  /* Ajustes para la lista de enlaces de navegación */
@@ -388,7 +388,7 @@ button {
 
 .text-bg .read_more:hover {
      background-color: #0d0c0c;
-     color: #fff;
+     color: #020202;
 }
 
 .banner .carousel-indicators {
