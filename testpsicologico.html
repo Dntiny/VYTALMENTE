@@ -184,6 +184,30 @@
             opacity: 0.5;
         }
     </style>
+
+    <script>
+    const cookieAlert = document.querySelector('.cookie-alert');
+    const cookieAccept = document.querySelector('.cookie-accept');
+    const overlay = document.querySelector('.overlay');
+
+    cookieAccept.addEventListener('click', () => {
+        cookieAlert.style.display = 'none';
+        overlay.style.display = 'none';
+        document.body.classList.remove('cookie-disabled');
+        document.cookie = "cookiesAccepted=true; expires=365d; path=/";
+    });
+
+    if (document.cookie.indexOf("cookiesAccepted=") === -1) {
+        cookieAlert.style.display = 'block';
+        overlay.style.display = 'block';
+        document.body.classList.add('cookie-disabled');
+    } else {
+        cookieAlert.style.display = 'none';
+        overlay.style.display = 'none';
+        document.body.classList.remove('cookie-disabled');
+    }
+</script>
+    
 </head>
 <body>
     <!-- Header con logo -->
