@@ -14,6 +14,16 @@
     border-radius: 0.25em;
   }
 
+  .btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px; /* Ajusta el espacio entre botones según sea necesario */
+}
+
+.btn-group .btn {
+    flex: 1 1 45%; /* Ajusta el tamaño para que se acomoden en columnas de a 2 */
+    margin-bottom: 5px; /* Espacio inferior entre filas de botones */
+}
 
   .label-success{
     background-color: green;
@@ -27,3 +37,5 @@
     background-color: yellow;
     color: white;
   }
+
+  
