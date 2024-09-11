@@ -4,25 +4,21 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Vitalmente - Cuestionario de Personalidad</title>
+    <title>VYtalmente - Cuestionario de Personalidad</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="images/fevicon.png" type="image/gif">
     <link rel="stylesheet" href="css/responsive.css">
-    <div class="cookie-alert">  
-
-        Antes de continuar te invito a que aceptas los terminos y condciones para ponernos en contacto contigo y hacer siguimiento a tu solicitud. <a  class="cookie-accept">Aceptar</a>
-    </div>
     <style>
-         body {
+        body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #f0f4f8;
             color: #333;
             margin: 0;
             padding: 0;
         }
         .header {
-            background-color: #f4f4f4;
+            background-color: #81c784; /* Verde claro */
             padding: 10px;
             text-align: center;
         }
@@ -41,7 +37,7 @@
         .quiz-container h1 {
             font-size: 24px;
             text-align: center;
-            color: #000000;
+            color: #388e3c; /* Verde oscuro */
             margin-bottom: 20px;
         }
         .personal-info, .questions, #results, #follow-up {
@@ -77,13 +73,13 @@
         }
         .button-container button {
             flex: 1;
-            margin: 0 5px;
+            margin: 0 5px; /* Espacio entre botones */
         }
         button[type="submit"], #contact-button, .nav-button {
             display: block;
             width: 100%;
             padding: 10px;
-            background-color: #388e3c;
+            background-color: #388e3c; /* Verde oscuro */
             color: #fff;
             border: none;
             border-radius: 4px;
@@ -93,18 +89,18 @@
             transition: background-color 0.3s;
         }
         button[type="submit"]:hover, #contact-button:hover, .nav-button:hover {
-            background-color: #2e7d32;
+            background-color: #2e7d32; /* Verde más oscuro */
         }
         #results, #follow-up {
             text-align: center;
-            display: none;
+            display: none; /* Inicialmente oculto */
         }
         #results p, #follow-up p {
             font-size: 18px;
             margin: 15px 0;
         }
         footer {
-            background-color: #388e3c;
+            background-color: #388e3c; /* Verde oscuro */
             color: #fff;
             text-align: center;
             padding: 20px 0;
@@ -131,83 +127,36 @@
             }
         }
 
-        .cookie-alert {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80%;
-            max-width: 500px;
-            background-color: #f5f5f5;
-            color: #333;
-            padding: 20px;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-            z-index: 9999;
-            font-family: 'Roboto', sans-serif;
-            text-align: center;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+        .button-start-quiz {
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 0.7em 1.4em 0.7em 1.1em;
+  color: white;
+  background: #ad5389;
+  background: linear-gradient(0deg, rgba(20,167,62,1) 0%, rgba(102,247,113,1) 100%);
+  border: none;
+  box-shadow: 0 0.7em 1.5em -0.5em #14a73e98;
+  letter-spacing: 0.05em;
+  border-radius: 20em;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
 
-        .cookie-alert p {
-            margin-bottom: 20px;
-        }
+.button-start-quiz:hover {
+  box-shadow: 0 0.5em 1.5em -0.5em #14a73e98;
+}
 
-        .cookie-accept {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-        }
+.button-start-quiz:active {
+  box-shadow: 0 0.3em 1em -0.5em #14a73e98;
+}
 
-        .cookie-accept:hover {
-            background-color: #45a049;
-        }
 
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 9998;
-        }
-
-        body.cookie-disabled *:not(.cookie-alert, .cookie-alert *, .overlay) {
-            pointer-events: none;
-            opacity: 0.5;
-        }
     </style>
-
-    <script>
-    const cookieAlert = document.querySelector('.cookie-alert');
-    const cookieAccept = document.querySelector('.cookie-accept');
-    const overlay = document.querySelector('.overlay');
-
-    cookieAccept.addEventListener('click', () => {
-        cookieAlert.style.display = 'none';
-        overlay.style.display = 'none';
-        document.body.classList.remove('cookie-disabled');
-        document.cookie = "cookiesAccepted=true; expires=365d; path=/";
-    });
-
-    if (document.cookie.indexOf("cookiesAccepted=") === -1) {
-        cookieAlert.style.display = 'block';
-        overlay.style.display = 'block';
-        document.body.classList.add('cookie-disabled');
-    } else {
-        cookieAlert.style.display = 'none';
-        overlay.style.display = 'none';
-        document.body.classList.remove('cookie-disabled');
-    }
-</script>
-    
 </head>
 <body>
     <!-- Header con logo -->
@@ -231,7 +180,7 @@
                     <label for="email">Correo Electrónico:</label>
                     <input type="email" id="email" name="email" required aria-required="true">
                 </div>
-                <button type="button" id="start-quiz" aria-label="Comenzar cuestionario">Comenzar Cuestionario</button>
+                <button class="button-start-quiz" type="button" id="start-quiz" aria-label="Comenzar cuestionario">Comenzar Cuestionario</button>
             </div>
             <div id="quiz-questions" style="display: none;">
                 <div class="question">

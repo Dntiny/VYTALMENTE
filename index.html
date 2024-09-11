@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
    <head>
       
       <!-- basic -->
@@ -32,75 +32,6 @@
    </head>
    <!-- body -->
    <body class="main-layout">
-      <div class="cookie-alert">
-
-         Utilizamos cookies para mejorar tu experiencia. Al continuar, aceptas el uso de cookies. <a href="#" class="cookie-accept">Aceptar</a>
-     </div>
-     <style>
-      .cookie-alert {
-          position: fixed;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          background-color: #f5f5f5;
-          color: #333;
-          padding: 15px;
-          box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
-          z-index: 9999;
-          font-family: 'Roboto', sans-serif;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-      }
-
-      .cookie-alert p {
-          margin: 0;
-          padding-right: 10px;
-      }
-
-      .cookie-accept {
-          background-color: #4CAF50;
-          color: white;
-          padding: 10px 20px;
-          text-decoration: none;
-          border-radius: 4px;
-          font-weight: bold;
-      }
-
-      .cookie-accept:hover {
-          background-color: #45a049;
-      }
-
-      .overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.5);
-          z-index: 9998;
-          display: none;
-      }
-  </style>
-  <script>
-      const cookieAlert = document.querySelector('.cookie-alert');
-      const cookieAccept = document.querySelector('.cookie-accept');
-      const overlay = document.querySelector('.overlay');
-
-      cookieAccept.addEventListener('click', () => {
-          cookieAlert.style.display = 'none';
-          overlay.style.display = 'none';
-          document.cookie = "cookiesAccepted=true; expires=365d; path=/";
-      });
-
-      if (document.cookie.indexOf("cookiesAccepted=") === -1) {
-          cookieAlert.style.display = 'block';
-          overlay.style.display = 'block';
-      } else {
-          cookieAlert.style.display = 'none';
-          overlay.style.display = 'none';
-      }
-  </script>
       <!-- loader  -->
       <div class="loader_bg">
          <div class="loader"><img src="images/loading.gif" alt="#"/></div>
@@ -197,7 +128,7 @@
                <div class="col-md-5">
                   <div class="titlepage">
                      <h2>Sobre <span class="green">Nosotros</span></h2>
-                     <p>Vytalmente es un espacio donde la salud y el bienestar se encuentran. Somos un equipo de expertos en nutrición y psicología que buscamos transformar vidas a través de soluciones innovadoras y personalizadas. Nos apasiona combinar los últimos avances científicos con un enfoque humano para diseñar planes de tratamiento que se adapten a tu estilo de vida y tus objetivos. En Vitalmente, creemos que cada persona es única y merece un cuidado especial.</p>
+                     <p>Vytalmente es un espacio donde la salud y el bienestar se encuentran. Somos un equipo de expertos en nutrición y psicología que buscamos transformar vidas a través de soluciones innovadoras y personalizadas. Nos apasiona combinar los últimos avances científicos con un enfoque humano para diseñar planes de tratamiento que se adapten a tu estilo de vida y tus objetivos. En Vytalmente, creemos que cada persona es única y merece un cuidado especial.</p>
                      <a class="read_more" href="about.html"> Saber más</a>
                   </div>
                </div>
@@ -297,13 +228,11 @@
                         La clave está en nutrir tu cuerpo y tu mente con hábitos saludables y positivos. ¡Hoy es el mejor día para empezar a sentirte increíble!🥗💪
                   </div>
                   <div class="col-md-3 col-sm-6">
-                     <h3>INFORMATION</h3>
+                     <h3>INFORMACION</h3>
                      <ul class="link_menu">
                         <li><a href="index.html">Inicio</a></li>
                         <li><a href="about.html"> Nosotros</a></li>
                         <li><a href="service.html">Apoyo</a></li>
-                        <li><a href="gallery.html">Ayuda</a></li>
-                        <li><a href="testimonial.html">Testimonos</a></li>
                         <li><a href="contact.html">URGENCIA</a></li>
                      </ul>
                   </div>
@@ -313,19 +242,13 @@
                         ¡Únete a nuestra comunidad y comparte tus experiencias! 
                      </p>
                   </div>
-                  <div class="col-md-6 offset-md-6">
-                     <form id="hkh" class="bottom_form">
-                        <input class="enter" placeholder="Enter your email" type="text" name="Enter your email">
-                        <button class="sub_btn">subscribe</button>
-                     </form>
-                  </div>
                </div>
             </div>
             <div class="copyright">
                <div class="container">
                   <div class="row">
                      <div class="col-md-10 offset-md-1">
-                        <p>&copy; 2023 Vitalmente. Todos los derechos reservados.</p>
+                        <p>&copy; 2024 Vitalmente. Todos los derechos reservados.</p>
                         <p class="return-home">Haga clic en el logo para volver a la página inicial.</p>
                      </div>
                   </div>

@@ -98,30 +98,10 @@ $mostrar = mysqli_fetch_array($resultado);
                 Addons
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
-                    </div>
-                </div>
-            </li>
-
+      
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="promedio.php">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
             </li>
@@ -135,7 +115,7 @@ $mostrar = mysqli_fetch_array($resultado);
                 <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Registros screen:</h6>
-                        <a class="collapse-item" href="prestamo.php">Lista</a>
+                        <a class="collapse-item" href="voluntarios.php">Lista</a>
                      
                         
                     </div>
@@ -156,12 +136,24 @@ $mostrar = mysqli_fetch_array($resultado);
                     </div>
                 </div>
             </li>
-            <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages3"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-user"></i>
+                    <span>Test</span>
+                </a>
+                <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Test screen:</h6>
+                        <a class="collapse-item" href="testnutricional.php">nutricional</a>
+                        <a class="collapse-item" href="testpsicologico.php">psicologico</a>
+                        
+                    </div>
+                </div>
             </li>
+ 
+            <!-- Nav Item - Tables -->
+    
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -238,10 +230,7 @@ $mostrar = mysqli_fetch_array($resultado);
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                     aria-labelledby="userDropdown">
                
-                    <a class="dropdown-item" href="#">
-                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Settings
-                    </a>
+             
                   
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -416,6 +405,7 @@ $totalData = "Error en la consulta";
             <!-- Pending Requests Card Example -->
  
             <div class="card mb-4">
+            <a href="export/export-voluntarios.php" class="btn btn-success">Exportar a Excel</a>
     <div class="card-header"><i class="glyphicon glyphicon-user"></i>Tabla Usuario</div>
     <div class="card-body">
         <form class="form-inline" method="get">
@@ -459,11 +449,11 @@ $totalData = "Error en la consulta";
                                     <td>' . $row['email'] . '</td>
                                 <td>' . $row['area'] . '</td>
                                     <td>
-                                        <a href="editar_prestamo.php?id=' . $row['idvoluntarios'] . '" title="Editar" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>';
+                                        <a href="edit/edit-voluntario.php?id=' . $row['idvoluntarios'] . '" title="Editar" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>';
                                     
                                    
                                         echo'
-                                        <a href="prestamo.php?id=' . $row['idvoluntarios'] . '" title="Eliminar" onclick="return confirm(\'Esta seguro de borrar los datos ' . $row['name'] . '?\')" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                                        <a href="eliminar/eliminar-voluntarios.php?id=' . $row['idvoluntarios'] . '" title="Eliminar" onclick="return confirm(\'Esta seguro de borrar los datos ' . $row['name'] . '?\')" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
                                     </td>
                                 </tr>';
             

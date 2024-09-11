@@ -42,7 +42,7 @@ $nombre = $_SESSION["usuario"];
 <?php
 
 require 'conexion.php';
-include 'eliminar.php';
+include 'eliminar/eliminar.php';
 $sql = "SELECT * FROM registros";
 $resultado = mysqli_query($conn, $sql);
 $mostrar = mysqli_fetch_array($resultado);
@@ -152,11 +152,7 @@ $mostrar = mysqli_fetch_array($resultado);
                 </div>
             </li>
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
-            </li>
+        
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -233,11 +229,7 @@ $mostrar = mysqli_fetch_array($resultado);
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                     aria-labelledby="userDropdown">
                
-                    <a class="dropdown-item" href="#">
-                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Settings
-                    </a>
-                  
+          
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -411,6 +403,7 @@ $totalData = "Error en la consulta";
             <!-- Pending Requests Card Example -->
  
             <div class="card mb-4">
+            <a href="export/export-registro.php" class="btn btn-success">Exportar a Excel</a>
     <div class="card-header"><i class="glyphicon glyphicon-user"></i>Tabla Usuario</div>
     <div class="card-body">
         <form class="form-inline" method="get">
@@ -473,18 +466,43 @@ $totalData = "Error en la consulta";
                                 echo '<span class="label label-process">en proceso</span>';
                             }
                             echo '</td>
-                                    <td>
-                                        <a href="editar_prestamo.php?id=' . $row['idregistro'] . '" title="Editar" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>';
-                                     if($row['estado']=='no resuelto'){
-                                        echo '<a href="#" id="btnAbrirModal" class="btn btn-green btn-sm " data-toggle="modal" data-target="#modalAgregarDato" data-id-tabla="' . $row['idregistro'] . '">
-        <span class="glyphicon glyphicon-send" aria-hidden="true"></span> 
-      </a>';
-                                     }
-                                     echo '<a href="registropdf.php?id=' . $row['idregistro'] . '" title="documento"  class="btn btn-white btn-sm" target="_blank"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span></a>';
-                                        echo'
-                                        <a href="eliminar.php?id=' . $row['idregistro'] . '" title="Eliminar" onclick="return confirm(\'Esta seguro de borrar los datos ' . $row['name'] . '?\')" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
-                                    </td>
-                                </tr>';
+                            <td>
+                                <div class="btn-container">
+                                    <div class="btn-row">
+                                   <a href="#" id="btnAbrirModal1" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalAgregarDato2" data-id-tabla="'.$row['idregistro'].'">
+    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+</a>';
+
+                                        
+                                        if ($row['estado'] == 'no resuelto') {
+                                            if ($row['ayuda'] == 'Nutrición') {
+                                                echo '<a href="#" id="btnAbrirModal" class="btn btn-green btn-sm" data-toggle="modal" data-target="#modalAgregarDato" data-id-tabla="' . $row['idregistro'] . '">
+                                                    <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                                </a>';
+                                            }
+                                            if ($row['ayuda'] == 'Psicologica') {
+                                                echo '<a href="#" id="btnAbrirModal1" class="btn btn-green btn-sm" data-toggle="modal" data-target="#modalAgregarDato1" data-id-tabla="' . $row['idregistro'] . '">
+                                                    <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                                </a>';
+                                            }
+                                        }
+                                        
+                                    echo '</div>
+                                </div>';
+                          
+                                        echo '</div>
+                                    <div class="btn-row">
+                                        <a href="pdf/registropdf.php?id=' . $row['idregistro'] . '" title="documento" class="btn btn-white btn-sm" target="_blank">
+                                            <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>
+                                        </a>
+                                        <a href="eliminar/eliminar.php?id=' . $row['idregistro'] . '" title="Eliminar" onclick="return confirm(\'¿Está seguro de borrar los datos ' . $row['name'] . '?\')" class="btn btn-danger btn-sm">
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>';
+                        
             
                                 
                              
@@ -542,7 +560,7 @@ $totalData = "Error en la consulta";
                 <div class="modal-body">Selecciona "Logout" si estas listo para cerrar sesion.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.php">Logout</a>
+                    <a class="btn btn-primary" href="cerrar_sesion.php">Logout</a>
                 </div>
             </div>
         </div>
@@ -587,7 +605,7 @@ $totalData = "Error en la consulta";
                             <select id="voluntario" class="form-control" name="voluntario" required>
                                 <?php
                                 include('conexion.php');
-                                $sql = "SELECT idvoluntarios, name FROM voluntarios";
+                                $sql = "SELECT idvoluntarios, name FROM voluntarios WHERE area='Nutricion'";
                                 $result = $conn->query($sql);
 
                                 if ($result->num_rows > 0) {
@@ -608,10 +626,122 @@ $totalData = "Error en la consulta";
             </div>
         </div>
     </div>
+
+
+
+
+    <div class="modal fade" id="modalAgregarDato1" tabindex="-1" role="dialog" aria-labelledby="modalAgregarDatoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAgregarDatoLabel">Modulo de Voluntarios</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulario para ingresar los datos -->
+                    <form action="enviar-voluntarios.php" method="post">
+                        <!-- Campo oculto para enviar el ID de la tabla -->
+                        <input type="hidden" id="idTabla" name="idTabla">
+                        
+                        <div class="form-group">
+                            <label for="voluntario">Seleccionar Voluntario:</label>
+                            <select id="voluntario" class="form-control" name="voluntario" required>
+                                <?php
+                                include('conexion.php');
+                                $sql = "SELECT idvoluntarios, name FROM voluntarios Where area='Psicologia'";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while($row = $result->fetch_assoc()) {
+                                        echo "<option value='" . $row['idvoluntarios'] . "'>" . $row['name'] . "</option>";
+                                    }
+                                } else {
+                                    echo "<option value=''>No hay voluntarios disponibles</option>";
+                                }
+                                $conn->close();
+                                ?>
+                            </select>
+                        </div>
+                    
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modalAgregarDato2" tabindex="-1" role="dialog" aria-labelledby="modalAgregarDatoLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAgregarDatoLabel">Módulo de Estado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulario para ingresar los datos -->
+                <form action="edit/editar-registro.php" method="post">
+                    <!-- Campo oculto para enviar el ID de la tabla -->
+                    <input type="hidden" id="idTabla" name="idTabla">
+                    
+                    <div class="form-group">
+                        <label for="estado">Seleccionar Opción:</label>
+                        <select id="estado" class="form-control" name="estado" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="no resuelto">No resuelto</option>
+                            <option value="resuelto">Resuelto</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script>
+
+
+
+
 $('.btnAbrirModal').on('click', function() {
     $('#modalAgregarDato').modal('show');
 });
+
+$('.btnAbrirModal1').on('click', function() {
+    $('#modalAgregarDato1').modal('show');
+});
+
+
 
 $('#modalAgregarDato').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget); // Botón que activó el modal
@@ -620,7 +750,25 @@ $('#modalAgregarDato').on('show.bs.modal', function (event) {
     modal.find('.modal-body #idTabla').val(idTabla); // Asignar el ID de la tabla al campo oculto en el modal
 });
 
+$('#modalAgregarDato1').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Botón que activó el modal
+    var idTabla = button.data('id-tabla'); // Extraer el ID de la tabla de los atributos de datos del botón
+    var modal = $(this);
+    modal.find('.modal-body #idTabla').val(idTabla); // Asignar el ID de la tabla al campo oculto en el modal
+});
 
+
+$(document).ready(function() {
+    // Manejar el evento de clic en el enlace del modal
+    $('#modalAgregarDato2').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Botón que abrió el modal
+        var idTabla = button.data('id-tabla'); // Extraer el ID del atributo data-id-tabla
+
+        // Establecer el valor del campo oculto en el modal
+        var modal = $(this);
+        modal.find('#idTabla').val(idTabla);
+    });
+});
 
 
 
