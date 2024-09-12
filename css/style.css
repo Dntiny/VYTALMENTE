@@ -466,14 +466,22 @@ button {
      color: #16e816 !important;
 }
 
+.green2 {
+     color: #4CAF50 !important;
+}
+
 .red {
      color: #b63232 !important;
-
 }
+
 .black {
      color: #000!important;
-
 }
+
+.text-peque {
+     font-size: 8px; /* Puedes ajustar el valor según el tamaño que desees */
+     color: inherit;   /* Mantendrá el color actual del texto o lo puedes cambiar */
+ }
 
 .d_flex {
      display: flex;
