@@ -39,7 +39,7 @@
             .quiz-container h1 {
                 font-size: 24px;
                 text-align: center;
-                color: #000000;
+                color: #388e3c;
                 margin-bottom: 20px;
             }
             .personal-info, .questions, #results, #follow-up {
@@ -129,19 +129,58 @@
                 }
             }
 
-            
+     /* Capa de sobreposición */
+/* Capa de sobreposición */
+.overlay {
+    position: fixed; /* Ocupa toda la pantalla */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+}
 
+/* Estilo del cargador dentro del overlay */
 .loader-container {
     text-align: center;
     color: white;
 }
 
+.loader {
+    border: 16px solid #f3f3f3; /* Color del fondo */
+    border-top: 16px solid #3498db; /* Color del cargador */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin: 0 auto; /* Centrar el loader */
+}
+
+/* Animación del cargador */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Estilo para el mensaje */
+.loader-container p {
+    font-size: 16px;
+    margin: 20px 0 0; /* Separar el mensaje del cargador */
+}
 
 
 p {
     font-size: 16px;
     margin: 0;
+    color: black;
 }
+       
+
+
 
 
 .button-start-quiz {
@@ -171,6 +210,83 @@ p {
 .button-start-quiz:active {
   box-shadow: 0 0.3em 1em -0.5em #14a73e98;
 }
+
+/* Estilos generales del modal */
+.modal {
+    display: none; /* Ocultar el modal por defecto */
+    position: fixed; /* Quedarse fijo en la pantalla */
+    z-index: 1000; /* Colocar encima del contenido */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Agregar barra de desplazamiento si es necesario */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    backdrop-filter: blur(5px); /* Efecto de desenfoque en el fondo */
+    transition: opacity 0.3s ease; /* Transición suave */
+}
+
+/* Contenido del modal */
+.modal-content {
+    background-color: #ffffff;
+    margin: 5% auto; /* Espaciado desde el borde superior */
+    padding: 20px;
+    border-radius: 8px; /* Bordes redondeados */
+    width: 80%; /* Ancho del modal */
+    max-width: 800px; /* Ancho máximo */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra del modal */
+    animation: slideIn 0.3s ease-out; /* Animación de entrada */
+}
+
+/* Botón de cerrar */
+.close {
+    color: #333;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease; /* Transición para el color */
+}
+
+.close:hover,
+.close:focus {
+    color: #2e7d32; /* Color al pasar el cursor */
+    text-decoration: none;
+}
+
+/* Estilos del encabezado */
+.modal-content h2 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.modal-content h3 {
+    color: #2e7d32;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Estilo del texto del modal */
+.modal-content p {
+    color: #555;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+/* Animación de entrada del modal */
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 
 
 
@@ -214,7 +330,11 @@ p {
                         <label for="weight">Peso (kg):</label>
                         <input type="number" id="weight" name="weight" required aria-required="true">
                     </div>
-                    <button class="button-start-quiz"  type="button" id="start-quiz" aria-label="Comenzar cuestionario">Comenzar Cuestionario</button>
+                    <div class="terms-container">
+                        <input type="checkbox" id="accept-terms" required aria-required="true">
+                        <label for="accept-terms">He leído y acepto los <a href="#" id="open-terms">términos y condiciones y la politica de la privacidad</a>.</label>
+                    </div>
+                    <button class="button-start-quiz"  type="button" id="start-quiz" aria-label="Comenzar cuestionario" >Comenzar Cuestionario</button>
                 </div>
                 <div id="quiz-questions" style="display: none;">
                     <div class="question">
@@ -245,6 +365,37 @@ p {
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/js/bootstrap.min.js"></script>
+
+
+
+        <div id="terms-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Términos y Condiciones</h2>
+                <h3>Cumplimiento Legal:</h3>
+                <p>
+                    Telesalud: Este servicio está facultado por la Ley 1419 de 2010, que regula la telesalud en Colombia. Todos nuestros profesionales, incluyendo nutricionistas y psicólogos, están debidamente registrados y autorizados para prestar servicios de manera virtual bajo el régimen del Registro Único Nacional de Profesionales de la Salud (RETHUS), conforme a la Resolución 2654 de 2019.
+                </p>
+                <h3>Protección de Datos:</h3>
+                <p>
+                    Ley 1581 de 2012: La información proporcionada a través de este servicio será utilizada exclusivamente por los profesionales mencionados anteriormente para la prestación de servicios de salud mental y nutricional. Sus datos serán manejados en conformidad con la Ley 1581 de 2012, que protege la información personal en Colombia y no serán compartidos con terceros sin su consentimiento expreso.
+                </p>
+                <h3>Uso de la Información:</h3>
+                <p>
+                    La información contenida en nuestra base de datos será manejada con estricta confidencialidad y seguridad, conforme a las normativas vigentes en materia de protección de datos personales y la Ley 1581 de 2012.
+                </p>
+                <h3>Consentimiento:</h3>
+                <p>
+                    Al aceptar estos términos, usted consiente el uso de sus datos para los fines descritos y confirma que ha leído y comprendido las políticas de privacidad y protección de datos.
+                </p>
+            </div>
+        </div>
+
+
+
+
+
+
         <script>
             const questions = [
                 { text: "1. ¿Ha perdido peso sin hacer dieta en los últimos 3 meses?", options: ["Sí", "No"], scores: [1, 0] },
@@ -273,112 +424,126 @@ p {
         let responses = [];
         let adjustedScore = 0; // Definir adjustedScore en un contexto más amplio
 
-        function renderQuestion() {
-            const question = questions[currentQuestionIndex];
-            document.getElementById('question-text').innerText = question.text;
-            const optionsContainer = document.getElementById('options-container');
-            optionsContainer.innerHTML = '';
-            question.options.forEach((option, index) => {
-                optionsContainer.innerHTML += `<label><input type="radio" name="question${currentQuestionIndex}" value="${question.scores[index]}" ${responses[currentQuestionIndex] === question.scores[index] ? 'checked' : ''}> ${option}</label><br>`;
-            });
 
-            document.getElementById('prev-question').style.display = currentQuestionIndex === 0 ? 'none' : 'block';
-            document.getElementById('next-question').style.display = currentQuestionIndex === questions.length - 1 ? 'none' : 'block';
-            document.getElementById('submit-button').style.display = currentQuestionIndex === questions.length - 1 ? 'block' : 'none';
+        document.addEventListener('DOMContentLoaded', function() {
+    const acceptTermsCheckbox = document.getElementById('accept-terms');
+    const startQuizButton = document.getElementById('start-quiz');
+
+    // Habilitar o deshabilitar el botón basado en el estado del checkbox
+    acceptTermsCheckbox.addEventListener('change', function() {
+        startQuizButton.disabled = !acceptTermsCheckbox.checked;
+    });
+
+    // Validar si el usuario ha aceptado los términos antes de comenzar el cuestionario
+    startQuizButton.addEventListener('click', function() {
+        if (!acceptTermsCheckbox.checked) {
+            alert('Por favor, acepte los términos y condiciones antes de comenzar el cuestionario.');
+            return;
         }
 
-        function saveResponse() {
-            const selectedValue = document.querySelector('input[name="question' + currentQuestionIndex + '"]:checked');
-            if (selectedValue) {
-                responses[currentQuestionIndex] = parseInt(selectedValue.value);
-            } else {
-                responses[currentQuestionIndex] = null; // No response for this question
-            }
+        if (!validatePersonalInfo()) {
+            alert('Por favor, complete todos los campos de información personal antes de comenzar el cuestionario.');
+            return;
         }
 
-        function validatePersonalInfo() {
-            const requiredFields = ['full-name', 'age', 'city', 'phone', 'email', 'height', 'weight'];
-            return requiredFields.every(id => document.getElementById(id).value.trim() !== '');
-        }
+        document.getElementById('personal-info').style.display = 'none';
+        document.getElementById('quiz-questions').style.display = 'block';
+        renderQuestion();
+    });
+});
 
-        document.getElementById('start-quiz').addEventListener('click', function() {
-            if (!validatePersonalInfo()) {
-                alert('Por favor, complete todos los campos de información personal antes de comenzar el cuestionario.');
-                return;
-            }
-            document.getElementById('personal-info').style.display = 'none';
-            document.getElementById('quiz-questions').style.display = 'block';
-            renderQuestion();
-        });
+function renderQuestion() {
+    const question = questions[currentQuestionIndex];
+    document.getElementById('question-text').innerText = question.text;
+    const optionsContainer = document.getElementById('options-container');
+    optionsContainer.innerHTML = '';
+    question.options.forEach((option, index) => {
+        optionsContainer.innerHTML += `<label><input type="radio" name="question${currentQuestionIndex}" value="${question.scores[index]}" ${responses[currentQuestionIndex] === question.scores[index] ? 'checked' : ''}> ${option}</label><br>`;
+    });
 
-        document.getElementById('next-question').addEventListener('click', function() {
-            if (!validateQuestion()) {
+    document.getElementById('prev-question').style.display = currentQuestionIndex === 0 ? 'none' : 'block';
+    document.getElementById('next-question').style.display = currentQuestionIndex === questions.length - 1 ? 'none' : 'block';
+    document.getElementById('submit-button').style.display = currentQuestionIndex === questions.length - 1 ? 'block' : 'none';
+}
+
+function saveResponse() {
+    const selectedValue = document.querySelector('input[name="question' + currentQuestionIndex + '"]:checked');
+    if (selectedValue) {
+        responses[currentQuestionIndex] = parseInt(selectedValue.value);
+    } else {
+        responses[currentQuestionIndex] = null; // No response for this question
+    }
+}
+
+function validatePersonalInfo() {
+    const requiredFields = ['full-name', 'age', 'city', 'phone', 'email', 'height', 'weight'];
+    return requiredFields.every(id => document.getElementById(id).value.trim() !== '');
+}
+
+document.getElementById('next-question').addEventListener('click', function() {
+    if (!validateQuestion()) {
         return;
     }
+    saveResponse();
+    if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        renderQuestion();
+    }
+});
 
+document.getElementById('prev-question').addEventListener('click', function() {
+    saveResponse();
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        renderQuestion();
+    }
+});
 
-            saveResponse();
-            if (currentQuestionIndex < questions.length - 1) {
-                currentQuestionIndex++;
-                renderQuestion();
-            }
-      
+function validateQuestion() {
+    const selectedValue = document.querySelector('input[name="question' + currentQuestionIndex + '"]:checked');
+    if (!selectedValue) {
+        alert('Por favor, responda a la pregunta antes de continuar.');
+        return false;
+    }
+    return true;
+}
 
-        });
+document.getElementById('personality-quiz').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-        document.getElementById('prev-question').addEventListener('click', function() {
-            saveResponse();
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                renderQuestion();
-            }
-        });
+    // Save the response for the last question
+    saveResponse();
 
-        function validateQuestion() {
-            const selectedValue = document.querySelector('input[name="question' + currentQuestionIndex + '"]:checked');
-            if (!selectedValue) {
-                alert('Por favor, responda a la pregunta antes de continuar.');
-                return false;
-            }
-            return true;
-        }
+    // Calcula el puntaje total
+    const totalScore = responses.reduce((acc, score) => acc + (score || 0), 0);
 
-        document.getElementById('personality-quiz').addEventListener('submit', function(e) {
-            e.preventDefault();
+    // Obtención de datos personales
+    const height = parseFloat(document.getElementById('height').value) / 100; // Convertir altura a metros
+    const weight = parseFloat(document.getElementById('weight').value);
+    
+    // Cálculo del IMC
+    const bmi = weight / (height * height);
+    
+    // Ajuste de puntuación basado en el IMC
+    adjustedScore = totalScore + (bmi < 18.5 || bmi >= 25 ? 10 : 0); // Mover aquí la definición
 
-            // Save the response for the last question
-            saveResponse();
+    let resultText = '';
+    if (adjustedScore <= 10) {
+        resultText = 'Riesgo nutricional bajo.';
+    } else if (adjustedScore <= 15) {
+        resultText = 'Riesgo nutricional moderado.';
+    } else {
+        resultText = 'Riesgo nutricional alto.';
+    }
 
-            // Calcula el puntaje total
-            const totalScore = responses.reduce((acc, score) => acc + (score || 0), 0);
+    document.getElementById('result-text').innerText = resultText;
+    document.getElementById('quiz-questions').style.display = 'none';
+    document.getElementById('results').style.display = 'block';
+    document.getElementById('result-text').innerText = `Su puntuación es ${adjustedScore}. ${resultText}`;
+    document.getElementById('follow-up').style.display = 'block';
+});
 
-            // Obtención de datos personales
-            const height = parseFloat(document.getElementById('height').value) / 100; // Convertir altura a metros
-            const weight = parseFloat(document.getElementById('weight').value);
-            
-            // Cálculo del IMC
-            const bmi = weight / (height * height);
-            
-            // Ajuste de puntuación basado en el IMC
-            adjustedScore = totalScore + (bmi < 18.5 || bmi >= 25 ? 10 : 0); // Mover aquí la definición
-
-            let resultText = '';
-            if (adjustedScore <= 10) {
-                resultText = 'Riesgo nutricional bajo.';
-            } else if (adjustedScore <= 15) {
-                resultText = 'Riesgo nutricional moderado.';
-            } else {
-                resultText = 'Riesgo nutricional alto.';
-            }
-
-            document.getElementById('result-text').innerText = resultText;
-            document.getElementById('quiz-questions').style.display = 'none';
-            document.getElementById('results').style.display = 'block';
-            document.getElementById('result-text').innerText = `Su puntuación es ${adjustedScore}. ${resultText}`;
-            document.getElementById('follow-up').style.display = 'block';
-        });
-
-        document.getElementById('contact-button').addEventListener('click', function() {
+document.getElementById('contact-button').addEventListener('click', function() {
     // Mostrar la capa de sobreposición
     document.getElementById('overlay').style.display = 'block';
 
@@ -440,7 +605,43 @@ p {
     });
 });
 
+
+// Obtener el modal
+var modal = document.getElementById("terms-modal");
+
+// Obtener el enlace que abre el modal
+var btn = document.getElementById("open-terms");
+
+// Obtener el elemento <span> que cierra el modal
+var span = document.getElementsByClassName("close")[0];
+
+// Cuando el usuario haga clic en el enlace, abrir el modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// Cuando el usuario haga clic en <span> (x), cerrar el modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// Cuando el usuario haga clic fuera del modal, cerrarlo
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+
+
+
+
     </script>
+
+
+
+
+
 
     </body>
     </html>
