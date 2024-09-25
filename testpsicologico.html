@@ -352,32 +352,91 @@
         ];
     
         let currentQuestionIndex = 0;
-        let score = 0;
+let score = 0;
+const userResponses = []; // Array to store user responses
+
+
+
+function renderQuestion() {
+    const question = questions[currentQuestionIndex];
+    document.getElementById('question-text').innerText = question.text;
+    const optionsContainer = document.getElementById('options-container');
+    optionsContainer.innerHTML = '';
+
+    question.options.forEach((option, index) => {
+        const isChecked = userResponses[currentQuestionIndex] === (index + 1) ? 'checked' : '';
+        optionsContainer.innerHTML += `<label><input type="radio" name="question${currentQuestionIndex}" value="${index + 1}" ${isChecked}> ${option}</label><br>`;
+    });
+
+    document.getElementById('prev-question').style.display = currentQuestionIndex === 0 ? 'none' : 'block';
+    document.getElementById('next-question').style.display = currentQuestionIndex === questions.length - 1 ? 'none' : 'block';
+    document.getElementById('submit-button').style.display = currentQuestionIndex === questions.length - 1 ? 'block' : 'none';
+}
+
+
+function validatePersonalInfo() {
+    const fullName = document.getElementById('full-name').value.trim();
+    const age = document.getElementById('age').value.trim();
+    const city = document.getElementById('city').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
+
+    // Check for empty fields
+    if (!fullName || !age || !city || !phone || !email) {
+        return false;
+    }
     
-        function renderQuestion() {
-            const question = questions[currentQuestionIndex];
-            document.getElementById('question-text').innerText = question.text;
-            const optionsContainer = document.getElementById('options-container');
-            optionsContainer.innerHTML = '';
-            question.options.forEach((option, index) => {
-                optionsContainer.innerHTML += `<label><input type="radio" name="question${currentQuestionIndex}" value="${index + 1}"> ${option}</label><br>`;
-            });
-    
-            document.getElementById('prev-question').style.display = currentQuestionIndex === 0 ? 'none' : 'block';
-            document.getElementById('next-question').style.display = currentQuestionIndex === questions.length - 1 ? 'none' : 'block';
-            document.getElementById('submit-button').style.display = currentQuestionIndex === questions.length - 1 ? 'block' : 'none';
-        }
-    
-        document.getElementById('start-quiz').addEventListener('click', function() {
+    // Validate email format
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+        alert('Por favor, ingrese un correo electrónico válido.');
+        return false;
+    }
+
+    return true;
+}
+
+const phonePattern = /^\d{10}$/;
+    if (!phonePattern.test(phone)) {
+        alert('Por favor, ingrese un número de teléfono válido (10 dígitos).');
+        return false;
+    }
+
+
+    function calculateScore() {
+    score = userResponses.reduce((total, response) => total + (response || 0), 0); // Sumar las respuestas
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const quizContainer = document.getElementById('personality-quiz');
+    const acceptTermsCheckbox = document.getElementById('accept-terms');
+    const startQuizButton = document.getElementById('start-quiz');
+
+    acceptTermsCheckbox.addEventListener('change', function() {
+        startQuizButton.disabled = !acceptTermsCheckbox.checked;
+    });
+
+    quizContainer.addEventListener('click', function(e) {
+        if (e.target.matches('#start-quiz')) {
+            if (!acceptTermsCheckbox.checked) {
+                alert('Por favor, acepte los términos y condiciones antes de comenzar el cuestionario.');
+                return;
+            }
+
+            if (!validatePersonalInfo()) {
+                alert('Por favor, complete todos los campos de información personal, incluyendo un correo electrónico válido, antes de comenzar el cuestionario.');
+                return;
+            }
+
             document.getElementById('personal-info').style.display = 'none';
             document.getElementById('quiz-questions').style.display = 'block';
             renderQuestion();
-        });
-    
-        document.getElementById('next-question').addEventListener('click', function() {
+        }
+
+        if (e.target.matches('#next-question')) {
             const selectedValue = $('input[name="question' + currentQuestionIndex + '"]:checked').val();
             if (selectedValue) {
-                score += parseInt(selectedValue);
+                userResponses[currentQuestionIndex] = parseInt(selectedValue); // Almacenar respuesta
                 currentQuestionIndex++;
                 if (currentQuestionIndex < questions.length) {
                     renderQuestion();
@@ -385,67 +444,60 @@
             } else {
                 alert('Por favor, seleccione una opción.');
             }
-        });
-    
-        document.getElementById('prev-question').addEventListener('click', function() {
-            currentQuestionIndex--;
-            renderQuestion();
-        });
-    
-        document.getElementById('personality-quiz').addEventListener('submit', function(e) {
-            e.preventDefault();
-            let resultText = '';
-            if (score <= 25) {
-                resultText = 'Bajo en algún trastorno.';
-            } else if (score <= 50) {
-                resultText = 'Medio en algún trastorno.';
-            } else {
-                resultText = 'Alto en algún trastorno.';
+        }
+
+        if (e.target.matches('#prev-question')) {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion(); // Volver a renderizar
             }
-    
-            document.getElementById('quiz-questions').style.display = 'none';
-            document.getElementById('results').style.display = 'block';
-            document.getElementById('follow-up').style.display = 'block';
-            document.getElementById('result-text').innerText = `Su puntuación es ${resultText}`;
-        });
-    
-        document.getElementById('contact-button').addEventListener('click', function() {
+        }
+
+        if (e.target.matches('#contact-button')) {
             alert('Un profesional se pondrá en contacto con usted pronto.');
-            window.location.href = 'gallery.html'; // Redirige a la página de servicio
-        });
+            window.location.href = 'gallery.html'; // Redirigir a otra página
+        }
+    });
+
+    quizContainer.addEventListener('submit', function(e) {
+        e.preventDefault();
+        calculateScore() 
+        let resultText = '';
+
+        if (score <= 25) {
+            resultText = 'Bajo en algún trastorno.';
+        } else if (score <= 50) {
+            resultText = 'Medio en algún trastorno.';
+        } else {
+            resultText = 'Alto en algún trastorno.';
+        }
+
+        document.getElementById('quiz-questions').style.display = 'none';
+        document.getElementById('results').style.display = 'block';
+        document.getElementById('follow-up').style.display = 'block';
+        document.getElementById('result-text').innerText = `Su puntuación es: ${score},  ${resultText}`;
+    });
+});
 
 
-// Obtener el modal
-var modal = document.getElementById("terms-modal");
+// Modal Handling
+const modal = document.getElementById("terms-modal");
+const btn = document.getElementById("open-terms");
+const span = document.getElementsByClassName("close")[0];
 
-// Obtener el enlace que abre el modal
-var btn = document.getElementById("open-terms");
-
-// Obtener el elemento <span> que cierra el modal
-var span = document.getElementsByClassName("close")[0];
-
-// Cuando el usuario haga clic en el enlace, abrir el modal
 btn.onclick = function() {
     modal.style.display = "block";
 }
 
-// Cuando el usuario haga clic en <span> (x), cerrar el modal
 span.onclick = function() {
     modal.style.display = "none";
 }
 
-// Cuando el usuario haga clic fuera del modal, cerrarlo
 window.onclick = function(event) {
-    if (event.target == modal) {
+    if (event.target === modal) {
         modal.style.display = "none";
     }
 }
-
-
-
-
-
-
 
     </script>
 </body>
