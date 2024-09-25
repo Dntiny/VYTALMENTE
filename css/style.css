@@ -576,6 +576,7 @@ button {
 
 .service {
      padding-top: 80px;
+    
      
 }
 
@@ -588,17 +589,29 @@ button {
      align-items: center;
 }
 
-.service_box {
+.service_box-apoyo {
      font-size: 25px;
      color: #252525;
-     padding-bottom: 5px;
+     padding-bottom: 16px;
+     border-radius: 20px;
      margin-top: 15px;
      font-weight: bold;
      align-items: center;
+     box-shadow: 10px 7px 20px #49d625;
+}
+.service_box {
+     font-size: 25px;
+     color: #252525;
+     padding-bottom: 16px;
+     border-radius: 20px;
+     margin-top: 15px;
+     font-weight: bold;
+     align-items: center;
+    
 }
 
 .mar_top {
-     margin-top: -35px;
+     margin-top: 35px;
 }
 
 .service_box p {
@@ -611,6 +624,17 @@ button {
      margin-top: 60px;
 }
 
+.service-container{
+     padding: 60px 20px;
+    
+     border-radius: 20px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     margin: 20px auto;
+     max-width: 1200px;
+
+     background-color: #ffff;
+
+}
 
 /** end service section **/
 
@@ -700,6 +724,7 @@ button {
      background-position: center;
      margin-top: -90px;
      padding: 80px 0;
+     
 }
 
 .contact .titlepage {
@@ -725,6 +750,7 @@ button {
      font-size: 18px;
      font-weight: normal;
      border-radius: 5px;
+     
 }
 
 .main_form .textarea {
