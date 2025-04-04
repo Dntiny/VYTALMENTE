@@ -27,7 +27,7 @@ $nombre = $_SESSION["usuario"];
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
+      <link rel="icon" href="images/logo.ico" type="image/x-icon">
     <title>VytalMente - Dashboard</title>
 
     <!-- Custom fonts for this template-->
@@ -115,7 +115,7 @@ $mostrar = mysqli_fetch_array($resultado);
                 <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Registros screen:</h6>
-                        <a class="collapse-item" href="voluntarios.php">Lista</a>
+                        <a class="collapse-item" href="administra.php">Lista</a>
                      
                         
                     </div>
@@ -180,15 +180,7 @@ $mostrar = mysqli_fetch_array($resultado);
         </button>
 
         <!-- Topbar Search -->
-        <form
-            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-               
-                <div class="input-group-append">
-                    
-                </div>
-            </div>
-        </form>
+  
 
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
@@ -513,7 +505,7 @@ $totalData = "Error en la consulta";
                 <div class="modal-body">Selecciona "Logout" si estas listo para cerrar sesion.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.php">Logout</a>
+                    <a class="btn btn-primary" href="cerrar_sesion.php">Logout</a>
                 </div>
             </div>
         </div>

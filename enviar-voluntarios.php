@@ -60,16 +60,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 try {
                     // Configuración del servidor SMTP
-                    $mail->isSMTP();
-                    $mail->Host = 'outlook.office365.com';
-                    $mail->SMTPAuth = true;
-                    $mail->Username = 'mateo308@hotmail.com';
-                    $mail->Password = 'dante3005';
-                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                    $mail->Port = 587;
+                     $mail = new PHPMailer(true);
+                        $mail->isSMTP();
+                        $mail->CharSet = 'UTF-8'; 
+                        $mail->Host = 'smtp.gmail.com';
+                        $mail->SMTPAuth = true;
+                        $mail->Username = 'vytalmente@gmail.com'; // Cambiar por variable de entorno
+                        $mail->Password = 'uzph paju oknr yktm'; // Cambiar por variable de entorno
+                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                        $mail->Port = 587;
 
                     // Destinatarios
-                    $mail->setFrom('mateo308@hotmail.com', 'Formulario de Contacto');
+                    $mail->setFrom('vytalmente@gmail.com', 'Formulario de Contacto');
                     $mail->addAddress($email); // Enviar el correo al email obtenido del registro
 
                     // Contenido del correo

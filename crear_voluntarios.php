@@ -29,7 +29,7 @@ $nombre = $_SESSION["usuario"];
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
+      <link rel="icon" href="images/logo.ico" type="image/x-icon">
     <title>VytalMente - Dashboard</title>
 
     <!-- Custom fonts for this template-->
@@ -140,6 +140,22 @@ $mostrar = mysqli_fetch_array($resultado);
                     </div>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages3"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-user"></i>
+                    <span>Test</span>
+                </a>
+                <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Test screen:</h6>
+                        <a class="collapse-item" href="testnutricional.php">nutricional</a>
+                        <a class="collapse-item" href="testpsicologico.php">psicologico</a>
+                        
+                    </div>
+                </div>
+            </li>
+            <!-- Nav
             <!-- Nav Item - Tables -->
          
 
@@ -174,27 +190,7 @@ $mostrar = mysqli_fetch_array($resultado);
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
             <li class="nav-item dropdown no-arrow d-sm-none">
-                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-search fa-fw"></i>
-                </a>
-                <!-- Dropdown - Messages -->
-                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                    aria-labelledby="searchDropdown">
-                    <form class="form-inline mr-auto w-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small"
-                                placeholder="Search for..." aria-label="Search"
-                                aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </li>
+
   
 
 
@@ -209,10 +205,7 @@ $mostrar = mysqli_fetch_array($resultado);
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                     aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="editar_usuarios.php">
-                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Settings
-                    </a>
+                
                 
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -477,7 +470,7 @@ $totalData = "Error en la consulta";
                 <div class="modal-body">Selecciona "Logout" si estas listo para cerrar sesion.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.php">Logout</a>
+                    <a class="btn btn-primary" href="cerrar_session.php">Logout</a>
                 </div>
             </div>
         </div>

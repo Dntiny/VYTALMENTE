@@ -17,7 +17,7 @@ if (isset($_GET['id'])) {
     $id = (int) $_GET['id'];
 
     // Preparar la consulta SQL para eliminar el registro
-    $stmt = $conn->prepare("DELETE FROM quiz_nutricional WHERE id = ?");
+    $stmt = $conn->prepare("DELETE FROM quiz_psicologico WHERE id = ?");
     
     if ($stmt) {
         $stmt->bind_param('i', $id); // 'i' indica que es un entero
@@ -25,12 +25,12 @@ if (isset($_GET['id'])) {
         if ($stmt->execute()) {
             echo "<script>
                     alert('Registro eliminado satisfactoriamente: $id');
-                    window.location.href = '../testnutricional.php';
+                    window.location.href = '../testpsicologico.php';
                   </script>";
         } else {
             echo "<script>
                     alert('No se pudo eliminar el registro: $id');
-                    window.location.href = '../testnutricional.php';
+                    window.location.href = '../testpsicologico.php';
                   </script>";
         }
         
@@ -38,7 +38,7 @@ if (isset($_GET['id'])) {
     } else {
         echo "<script>
                 alert('Error en la preparación de la consulta.');
-                window.location.href = '../testnutricional.php';
+                window.location.href = '../testpsicologico.php';
               </script>";
     }
 }

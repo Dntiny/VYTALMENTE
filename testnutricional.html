@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="icon" href="images/logo.ico" type="image/x-icon">
     <title>Vytalmente - Cuestionario de Personalidad</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="images/fevicon.png" type="image/gif">
     <link rel="stylesheet" href="css/responsive.css">
-    
 
     <style>
         body {
@@ -395,29 +395,15 @@ to {
 
 
 
-
     <script>
         const questions = [
             { text: "1. ¿Ha perdido peso sin hacer dieta en los últimos 3 meses?", options: ["Sí", "No"], scores: [1, 0] },
-            { text: "2. ¿Cuántas comidas completas toma al día?", options: ["1 o 2", "3"], scores: [0, 1] },
+            { text: "2. ¿Cuántas comidas completas toma al día?", options: ["1 o 2", "3"], scores: [1, 0] },
             { text: "3. ¿Come al menos una porción de lácteos al día?", options: ["Sí", "No"], scores: [0, 1] },
             { text: "4. ¿Consume dos o más porciones de frutas o verduras al día?", options: ["Sí", "No"], scores: [0, 1] },
             { text: "5. ¿Toma más de tres vasos de líquidos al día?", options: ["Sí", "No"], scores: [0, 1] },
-            { text: "6. ¿Tiene problemas para masticar o tragar alimentos?", options: ["Sí", "No"], scores: [0, 1] },
-            { text: "7. ¿Se siente capaz de salir de casa?", options:["Sí", "No"], scores: [0, 1] },
-            { text: "8. ¿Ha sufrido algún estrés psicológico o enfermedad aguda en los últimos tres meses?", options: ["Sí", "No"], scores: [0, 1] },
-            { text: "9. ¿Ha disminuido su apetito recientemente?", options: ["Sí", "No"], scores: [0, 1] },
-            { text: "10. ¿Cuántas veces a la semana consume carne, pescado o huevos?", options: ["Menos de 1 vez", "1 o más veces"], scores: [0, 1] },
-            { text: "11. ¿Sufre de úlceras o heridas que no sanan?", options: ["Sí", "No"], scores: [0, 1] },
-            { text: "12. ¿Toma algún tipo de suplemento nutricional?", options: ["Sí", "No"], scores: [0, 1] },
-            { text: "13. ¿Cómo calificaría su salud general comparada con otras personas de su edad?", options: ["Peor", "Igual o mejor"], scores: [0, 1] },
-            { text: "14. ¿Le cuesta vestirse, levantarse o caminar?", options: ["Sí", "No"], scores: [0, 1] },
-            { text: "15. ¿Ha experimentado algún cambio en su estado de ánimo o comportamiento?", options: ["Sí", "No"], scores: [0, 1] },
-            { text: "16. ¿Consume cereales, pan, pasta o arroz a diario?", options: ["Sí", "No"], scores: [0, 1] },
-            { text: "17. ¿Se siente satisfecho después de las comidas?", options: ["Sí", "No"], scores: [0, 1] },
-            { text: "18. ¿Ha tenido alguna hospitalización en los últimos seis meses?", options: ["Sí", "No"], scores: [1, 0] },
-            { text: "19. ¿Cómo describiría su situación económica en términos de poder comprar alimentos saludables?", options: ["Difícil", "Fácil"], scores: [1, 0] },
-            { text: "20. ¿Tiene problemas para preparar su propia comida?", options: ["Sí", "No"], scores: [0, 1] }
+            { text: "6. ¿Ha disminuido su apetito recientemente?", options: ["Sí", "No"], scores: [1, 0] },
+            { text: "7. ¿Toma algún tipo de suplemento nutricional?", options: ["Sí", "No"], scores: [1, 0] }
         ];
 
         let currentQuestionIndex = 0;
@@ -630,6 +616,9 @@ fetch('sendmail/submitN-quiz.php', {
 });
 });
 
+document.getElementById('no-contact-button').addEventListener('click', function() {
+  window.location.href = 'https://vytalmente.website/index.html'; // Reemplaza 'index.html' con la URL de tu página principal
+});
 
 // Obtener el modal
 var modal = document.getElementById("terms-modal");
@@ -658,11 +647,7 @@ if (event.target == modal) {
 }
 
 
-
-
-
 </script>
-
 
 
 

@@ -24,6 +24,7 @@ $nombre = $_SESSION["usuario"];
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+          <link rel="icon" href="images/logo.ico" type="image/x-icon">
 
     <title>VytalMente - Dashboard</title>
 
@@ -100,7 +101,7 @@ $mostrar = mysqli_fetch_array($resultado);
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="promedio.php">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
             </li>
@@ -135,12 +136,22 @@ $mostrar = mysqli_fetch_array($resultado);
                     </div>
                 </div>
             </li>
-            <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages3"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-user"></i>
+                    <span>Test</span>
+                </a>
+                <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Test screen:</h6>
+                        <a class="collapse-item" href="testnutricional.php">nutricional</a>
+                        <a class="collapse-item" href="testpsicologico.php">psicologico</a>
+                        
+                    </div>
+                </div>
             </li>
+            <!-- Nav-->
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -217,10 +228,7 @@ $mostrar = mysqli_fetch_array($resultado);
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                     aria-labelledby="userDropdown">
                
-                    <a class="dropdown-item" href="#">
-                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Settings
-                    </a>
+               
                   
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -542,7 +550,7 @@ $conn->close();
                 <div class="modal-body">Selecciona "Logout" si estas listo para cerrar sesion.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.php">Logout</a>
+                    <a class="btn btn-primary" href="cerrar_sesion.php">Logout</a>
                 </div>
             </div>
         </div>

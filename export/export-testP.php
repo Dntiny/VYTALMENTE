@@ -14,7 +14,7 @@ if (!$conn) {
 
 // Construir la consulta SQL
 $query = "SELECT q.*, v.name AS atendido_por 
-          FROM quiz_nutricional q 
+          FROM quiz_psicologico q 
           LEFT JOIN voluntarios v ON q.atencion = v.idvoluntarios 
           ORDER BY q.id ASC";
 
@@ -29,8 +29,8 @@ $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
 
 // Configurar el ancho de las columnas
-$columnWidths = [20, 15, 30, 10, 20, 25, 15, 15, 10, 15, 15];
-foreach (range('A', 'K') as $index => $column) {
+$columnWidths = [20, 15, 30, 10, 20, 25, 15, 15];
+foreach (range('A', 'H') as $index => $column) {
     $sheet->getColumnDimension($column)->setWidth($columnWidths[$index]);
 }
 
@@ -49,10 +49,10 @@ $headerStyle = [
     ],
 ];
 
-$sheet->getStyle('A1:K1')->applyFromArray($headerStyle);
+$sheet->getStyle('A1:H1')->applyFromArray($headerStyle);
 
 // Añadir encabezados
-$headers = ['Nombre', 'Telefono', 'Email', 'Edad', 'Ciudad', 'Resultado', 'Altura', 'Peso', 'IMC', 'Estado', 'Atendido Por'];
+$headers = ['Nombre', 'Telefono', 'Email', 'Edad', 'Ciudad', 'Resultado', 'Estado',  'Atendido Por'];
 foreach ($headers as $index => $header) {
     $sheet->setCellValue(chr(65 + $index) . '1', $header);
 }
@@ -74,20 +74,17 @@ while ($row = mysqli_fetch_assoc($sql)) {
     $sheet->setCellValue('D' . $rowNumber, $row['age']);
     $sheet->setCellValue('E' . $rowNumber, $row['city']);
     $sheet->setCellValue('F' . $rowNumber, $row['result_text']);
-    $sheet->setCellValue('G' . $rowNumber, $row['height']);
-    $sheet->setCellValue('H' . $rowNumber, $row['weight']);
-    $sheet->setCellValue('I' . $rowNumber, $row['bmi']);
-    $sheet->setCellValue('J' . $rowNumber, $row['estado']);
-    $sheet->setCellValue('K' . $rowNumber, $row['atendido_por']);
+    $sheet->setCellValue('G' . $rowNumber, $row['estado']);
+    $sheet->setCellValue('H' . $rowNumber, $row['atendido_por']);
 
     // Aplicar formato a cada fila de datos
-    $sheet->getStyle('A' . $rowNumber . ':K' . $rowNumber)->applyFromArray($dataStyle);
+    $sheet->getStyle('A' . $rowNumber . ':H' . $rowNumber)->applyFromArray($dataStyle);
     $rowNumber++;
 }
 
 // Crear el archivo Excel
 $writer = new Xlsx($spreadsheet);
-$filename = 'testNutricional_' . date('Y-m-d_H-i-s') . '.xlsx';
+$filename = 'testPsicologico' . date('Y-m-d_H-i-s') . '.xlsx';
 
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 header('Content-Disposition: attachment;filename="' . $filename . '"');

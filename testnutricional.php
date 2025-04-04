@@ -26,7 +26,7 @@ $nombre = $_SESSION["usuario"];
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
+      <link rel="icon" href="images/logo.ico" type="image/x-icon">
     <title>VytalMente - Dashboard</title>
 
     <!-- Custom fonts for this template-->
@@ -44,7 +44,7 @@ $nombre = $_SESSION["usuario"];
 <?php
 
 require 'conexion.php';
-include 'eliminar/eliminar.php';
+
 $sql = "SELECT * FROM registros";
 $resultado = mysqli_query($conn, $sql);
 $mostrar = mysqli_fetch_array($resultado);
@@ -181,16 +181,7 @@ $mostrar = mysqli_fetch_array($resultado);
         </button>
 
         <!-- Topbar Search -->
-        <form
-            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-               
-                <div class="input-group-append">
-                    
-                </div>
-            </div>
-        </form>
-
+       
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
 
@@ -406,43 +397,67 @@ $totalData = "Error en la consulta";
 .form-control {
     margin-right: 20px; /* Ajusta el valor según tus necesidades */
 }
+
+
+.pagination {
+    margin-top: 20px;
+}
+
+.pagination .page-item {
+    margin: 0 5px;
+}
+
+.pagination .btn {
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.pagination .btn:hover {
+    opacity: 0.8; /* Efecto hover */
+}
+
+.pagination .btn.disabled {
+    background-color: #6c757d; /* Color para el botón deshabilitado */
+    cursor: not-allowed;
+    pointer-events: none; /* Deshabilitar clics */
+}
+
+
+
 </style>
 
             <!-- Pending Requests Card Example -->
- 
             <div class="card mb-4">
-            <a href="export/export-testN.php" class="btn btn-success">Exportar a Excel</a>
+    <a href="export/export-testN.php" class="btn btn-success">Exportar a Excel</a>
     <div class="card-header"><i class="glyphicon glyphicon-user"></i>Tabla Usuario</div>
     <div class="card-body">
 
         <form class="form-inline" method="get">
-   
             <div class="form-group">
                 <select name="filter" class="form-control" onchange="form.submit()">
-
                     <option value="0">Filtros de datos de registros</option>
                     <?php $filter = isset($_GET['filter']) ? strtolower($_GET['filter']) : NULL; ?>
-                    <option value="resuelto" <?php if ($filter == 'resuelto') { echo 'selected'; } ?>>resueltos</option>
-                    <option value="no resuelto" <?php if ($filter == 'no resuelto') { echo 'selected'; } ?>>no resueltos</option>
-                    <option value="en proceso" <?php if ($filter == 'en proceso') { echo 'selected'; } ?>>en proceso</option>
+                    <option value="resuelto" <?php if ($filter == 'resuelto') echo 'selected'; ?>>resueltos</option>
+                    <option value="no resuelto" <?php if ($filter == 'no resuelto') echo 'selected'; ?>>no resueltos</option>
+                    <option value="en proceso" <?php if ($filter == 'en proceso') echo 'selected'; ?>>en proceso</option>
                 </select>
                 
                 <div class="form-group">
                     <input type="text" id="searchCaseNumber" name="case_number" class="form-control" placeholder="Introduce el número de caso" value="<?php echo isset($_GET['case_number']) ? htmlspecialchars($_GET['case_number']) : ''; ?>">
-                  
                 </div>
                 
                 <button type="submit" class="btn btn-primary">Buscar</button>
             </div>
         </form>
         <br />
+        
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                    <th>Caso</th>
+                        <th>Caso</th>
                         <th>Nombre</th>
-                        
                         <th>Telefono</th>
                         <th>Email</th>
                         <th>Edad</th>
@@ -456,12 +471,19 @@ $totalData = "Error en la consulta";
                     </tr>
                 </thead>
                 <tbody>
+                    
                     <?php
-                    // Obtener los parámetros de búsqueda
+                    // Pagination variables
+                    
+                    $limit = 10; // Records per page
+                    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                    $offset = ($page - 1) * $limit;
+
+                    // Get search parameters
                     $filter = isset($_GET['filter']) ? strtolower($_GET['filter']) : NULL;
                     $case_number = isset($_GET['case_number']) ? mysqli_real_escape_string($conn, $_GET['case_number']) : '';
 
-                    // Construir la consulta SQL
+                    // Build the query
                     $query = "SELECT * FROM quiz_nutricional";
                     $conditions = array();
                     
@@ -477,9 +499,9 @@ $totalData = "Error en la consulta";
                         $query .= " WHERE " . implode(' AND ', $conditions);
                     }
                     
-                    $query .= " ORDER BY id ASC";
-                    
-                    // Ejecutar la consulta
+                    $query .= " ORDER BY id ASC LIMIT $offset, $limit";
+
+                    // Execute the query
                     $sql = mysqli_query($conn, $query);
                     
                     if (mysqli_num_rows($sql) == 0) {
@@ -488,14 +510,13 @@ $totalData = "Error en la consulta";
                         while ($row = mysqli_fetch_assoc($sql)) {
                             echo '
                                 <tr>
-                                       <td>' . $row['case_number'] . '</td>
+                                    <td>' . $row['case_number'] . '</td>
                                     <td>' . $row['full_name'] . '</td>
-                                
                                     <td>' . $row['phone'] . '</td>
                                     <td>' . $row['email'] . '</td>
                                     <td>' . $row['age'] . '</td>
                                     <td>' . $row['city'] . '</td>
-                                    <td>' . $row['result_text'] . '</td>                               
+                                    <td>' . $row['result_text'] . '</td>
                                     <td>' . $row['height'] . '</td>
                                     <td>' . $row['weight'] . '</td>
                                     <td>' . $row['bmi'] . '</td>
@@ -518,7 +539,6 @@ $totalData = "Error en la consulta";
                             echo '<a href="#" id="btnAbrirModal1" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalAgregarDato1" data-id-tabla="' . $row['id'] . '">
                                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
                                 </a>
-
                                 <a href="eliminar/eliminar-testN.php?id=' . $row['id'] . '" title="Eliminar" onclick="return confirm(\'¿Está seguro de borrar los datos ' . $row['full_name'] . '?\')" class="btn btn-danger btn-sm">
                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                 </a>
@@ -530,6 +550,41 @@ $totalData = "Error en la consulta";
                 </tbody>
             </table>
         </div>
+
+        <!-- Pagination -->
+        <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+                <?php
+                // Count total records
+                $count_query = "SELECT COUNT(*) as total FROM quiz_nutricional";
+                if (count($conditions) > 0) {
+                    $count_query .= " WHERE " . implode(' AND ', $conditions);
+                }
+                $count_result = mysqli_query($conn, $count_query);
+                $total_records = mysqli_fetch_assoc($count_result)['total'];
+                $total_pages = ceil($total_records / $limit);
+
+                // Previous page link
+                if ($page > 1) {
+                    echo '<li><a href="?page=' . ($page - 1) . '&filter=' . urlencode($filter) . '&case_number=' . urlencode($case_number) . '">&laquo; Anterior </a></li>';
+                }
+
+                // Page number links
+                for ($i = 1; $i <= $total_pages; $i++) {
+                    if ($i == $page) {
+                        echo '<li class="active"><span>' . $i . '</span></li>';
+                    } else {
+                        echo '<li><a href="?page=' . $i . '&filter=' . urlencode($filter) . '&case_number=' . urlencode($case_number) . '">' . $i . '</a></li>';
+                    }
+                }
+
+                // Next page link
+                if ($page < $total_pages) {
+                    echo '<li><a href="?page=' . ($page + 1) . '&filter=' . urlencode($filter) . '&case_number=' . urlencode($case_number) . '" > Siguiente &raquo;</a></li>';
+                }
+                ?>
+            </ul>
+        </nav>
     </div>
 </div>
 

@@ -28,16 +28,19 @@ $sheet = $spreadsheet->getActiveSheet();
 
 // Configurar el ancho de las columnas
 $sheet->getColumnDimension('A')->setWidth(20);
-$sheet->getColumnDimension('B')->setWidth(15);
+$sheet->getColumnDimension('B')->setWidth(34);
 $sheet->getColumnDimension('C')->setWidth(30);
 $sheet->getColumnDimension('D')->setWidth(10);
 $sheet->getColumnDimension('E')->setWidth(20);
 $sheet->getColumnDimension('F')->setWidth(25);
-$sheet->getColumnDimension('G')->setWidth(15);
+$sheet->getColumnDimension('G')->setWidth(34);
 $sheet->getColumnDimension('H')->setWidth(15);
 $sheet->getColumnDimension('I')->setWidth(10);
-$sheet->getColumnDimension('J')->setWidth(15);
-
+$sheet->getColumnDimension('J')->setWidth(34);
+$sheet->getColumnDimension('K')->setWidth(30);
+$sheet->getColumnDimension('L')->setWidth(30);
+$sheet->getColumnDimension('M')->setWidth(30);
+$sheet->getColumnDimension('N')->setWidth(30);
 // Aplicar color de fondo y alinear el texto de los encabezados
 $headerStyle = [
     'fill' => [
@@ -53,7 +56,7 @@ $headerStyle = [
     ],
 ];
 
-$sheet->getStyle('A1:J1')->applyFromArray($headerStyle);
+$sheet->getStyle('A1:N1')->applyFromArray($headerStyle);
 
 // Añadir encabezados
 $sheet->setCellValue('A1', 'Nombre');
@@ -65,7 +68,11 @@ $sheet->setCellValue('F1', 'Edad');
 $sheet->setCellValue('G1', 'Descripción');
 $sheet->setCellValue('H1', 'Estado');
 $sheet->setCellValue('I1', 'Ayuda');
-$sheet->setCellValue('J1', 'Atendido Por');
+$sheet->setCellValue('J1', 'Atentido por');
+$sheet->setCellValue('K1', 'Genero');
+$sheet->setCellValue('L1', 'Estrato');
+$sheet->setCellValue('M1', 'Barrio');
+$sheet->setCellValue('N1', 'Orientacion Sexual');
 
 // Aplicar formato a las celdas de datos
 $dataStyle = [
@@ -78,7 +85,10 @@ $dataStyle = [
 // Añadir datos
 $rowNumber = 2;
 while ($row = mysqli_fetch_assoc($sql)) {
-    $query1 = "SELECT * FROM voluntario where idvoluntarios='$idvoluntario'";
+    $atencion=$row["atencion"];
+    $query = "SELECT * FROM voluntarios where idvoluntarios='$atencion'";
+    $result = mysqli_query($conn, $query);
+    $row1 = mysqli_fetch_assoc($result);
 
 
     
@@ -91,10 +101,14 @@ while ($row = mysqli_fetch_assoc($sql)) {
     $sheet->setCellValue('G' . $rowNumber, $row['description']);
     $sheet->setCellValue('H' . $rowNumber, $row['estado']);
     $sheet->setCellValue('I' . $rowNumber, $row['ayuda']);
-    $sheet->setCellValue('J' . $rowNumber, $row['atencion']);
+    $sheet->setCellValue('J' . $rowNumber, $row1['name']);
+       $sheet->setCellValue('K' . $rowNumber, $row['genero']);
+          $sheet->setCellValue('L' . $rowNumber, $row['estrato']);
+             $sheet->setCellValue('M' . $rowNumber, $row['barrio']);
+                $sheet->setCellValue('N' . $rowNumber, $row['os']);
 
     // Aplicar formato a cada fila de datos
-    $sheet->getStyle('A' . $rowNumber . ':J' . $rowNumber)->applyFromArray($dataStyle);
+    $sheet->getStyle('A' . $rowNumber . ':N' . $rowNumber)->applyFromArray($dataStyle);
     $rowNumber++;
 }
 
